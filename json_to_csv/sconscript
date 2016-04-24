@@ -9,6 +9,7 @@ Sources = [
 env.AppendUnique( STATICLIBS = [
     env.BoostStaticLibs( [
         'program_options',
+        'timer',
     ] )
 ] )
 

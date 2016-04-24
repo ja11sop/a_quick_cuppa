@@ -9,6 +9,7 @@
 // Boost Library Includes
 #include <boost/program_options.hpp>
 #include <boost/optional.hpp>
+#include <boost/timer/timer.hpp>
 
 // Standard Library Includes
 #include <fstream>
@@ -130,6 +131,7 @@ int generate_csv( const std::string& InputPath, const std::string& OutputPath )
 
 int main( int argc, char* argv[] )
 {
+    boost::timer::auto_cpu_timer Timer;
     std::cout << "json_to_csv: ver." << json_to_csv::build::identity::product_version() << std::endl;
 
     auto Options = validated_options( argc, argv );
