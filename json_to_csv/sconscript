@@ -1,0 +1,13 @@
+Import('env')
+
+Sources = [
+    'main.cpp',
+]
+
+env.AppendUnique( STATICLIBS = [
+    env.BoostStaticLibs( [
+        'program_options',
+    ] )
+] )
+
+env.Build( 'json_to_csv', Sources )

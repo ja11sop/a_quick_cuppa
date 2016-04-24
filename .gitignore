@@ -1,3 +1,10 @@
+# cuppa
+_cuppa/
+_build/
+
+#Scons
+.scon*
+
 # Compiled Object files
 *.slo
 *.lo
