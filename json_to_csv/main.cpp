@@ -1,5 +1,8 @@
 // I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I I
 
+// Local Includes
+#include "json_to_csv/version.hpp"
+
 // RapidJSON Includes
 #include "rapidjson/document.h"
 
@@ -21,12 +24,11 @@ auto options()
     static auto Options
         = []()
             {
-                auto Options
-                = boost::program_options::options_description
-                    ( "Allowed Options" );
+                auto Options = po::options_description( "Allowed Options" );
 
                 Options.add_options()
                     ( "help", "Display this help message" )
+                    ( "version", "Display detailed version information" )
                     ( "input", "The StockTwits JSON dump we wish to read" )
                     ( "output,o", po::value<std::string>(), "The name of the output file. Defaults to <input>.csv");
 
@@ -67,6 +69,10 @@ auto validated_options( int argc, char* argv[] )
     if( OptionsMap.count( "help" ) )
     {
         return optional_options_t();
+    }
+    else if( OptionsMap.count( "version" ) )
+    {
+        return optional_options_t( OptionsMap );
     }
     if( !OptionsMap.count( "input" ) )
     {
@@ -124,11 +130,18 @@ int generate_csv( const std::string& InputPath, const std::string& OutputPath )
 
 int main( int argc, char* argv[] )
 {
+    std::cout << "json_to_csv: ver." << json_to_csv::build::identity::product_version() << std::endl;
+
     auto Options = validated_options( argc, argv );
     if( !Options )
     {
         std::cout << options() << std::endl;
         return 1;
+    }
+    else if( Options->count( "version" ) )
+    {
+        std::cout << json_to_csv::build::identity::report() << std::endl;
+        return 0;
     }
 
     auto& OptionMap = *Options;

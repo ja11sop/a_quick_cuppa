@@ -1,5 +1,7 @@
 Import('env')
 
+Version = "00.01.00"
+
 Sources = [
     'main.cpp',
 ]
@@ -10,4 +12,13 @@ env.AppendUnique( STATICLIBS = [
     ] )
 ] )
 
-env.Build( 'json_to_csv', Sources )
+Objects = env.Compile( Sources )
+
+VersionFile = env.CreateVersion(
+        "version.cpp",
+        Objects,
+        ["json_to_csv"],
+        Version
+)
+
+env.Build( 'json_to_csv', Objects + VersionFile )
