@@ -22,4 +22,10 @@ VersionFile = env.CreateVersion(
         Version
 )
 
+import os.path
+env.CopyFiles(
+    os.path.join( os.path.expanduser('~'), 'json_to_csv', 'data' ),
+    '#data/stocktwits.json'
+)
+
 env.Build( 'json_to_csv', Objects + VersionFile )
