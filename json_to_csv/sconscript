@@ -24,7 +24,7 @@ VersionFile = env.CreateVersion(
 
 import os.path
 env.CopyFiles(
-    os.path.join( os.path.expanduser('~'), 'json_to_csv', 'data' ),
+    os.path.join( os.path.expanduser('~'), 'json_to_csv' ),
     '#data/stocktwits.json'
 )
 
