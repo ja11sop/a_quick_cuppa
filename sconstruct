@@ -1,16 +1,17 @@
 import cuppa
 
-cuppa.run(
-    dependencies = {
-        'rapidjson': cuppa.header_library_dependency( 'rapidjson' ),
-    },
-    default_options = {
-        'rapidjson-location': 'git+https://github.com/miloyip/rapidjson.git',
-        'rapidjson-include': 'include',
-        'boost-version': 'latest',
-    },
-    default_dependencies = [
+rapidjson = cuppa.location_dependency(
         'rapidjson',
+        sys_include='include',
+        location='git+https://github.com/miloyip/rapidjson.git',
+)
+
+cuppa.run(
+    dependencies = [
+        rapidjson,
+    ],
+    default_dependencies = [
+        rapidjson.name(),
         'boost',
     ],
 )
